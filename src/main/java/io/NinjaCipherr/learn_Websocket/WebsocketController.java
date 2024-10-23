@@ -21,7 +21,9 @@ public class WebsocketController {
 
   @MessageMapping("/message")
   public void handleMessage(Message message) {
-    System.out.println("");
+    System.out.println("Received message from user: " + message.getUser() + ":" + message.getMessage());
+    simpMessagingTemplate.convertAndSend("/topic/message", message);
+    System.out.println("Sent message to /topic/messages: " + message.getUser() + ": " + message.getMessage());
   }
 
 }
